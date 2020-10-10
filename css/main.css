@@ -1,0 +1,37 @@
+html, body {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.connect {
+    width: 120px;
+}
+
+.inputAccueil {
+    box-shadow: -2px 4px 3px 0px black;
+    
+}
+.inputAccueil:focus {
+    outline: none;
+}
+    
+
+.inscription, .connection {
+    display: none;
+}
+
+.cadre {
+    width: 344px;
+    border: 2px solid black;
+}
+
+.btn-success:focus {
+    color: none;
+    background-color: none;
+    border-color: none;
+    box-shadow: none;
+}
+.btn:focus {
+    box-shadow: none;
+}
