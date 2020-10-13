@@ -35,3 +35,7 @@ html, body {
 .btn:focus {
     box-shadow: none;
 }
+
+.btn_game {
+    width : 100px ;
+}
