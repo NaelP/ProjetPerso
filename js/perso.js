@@ -17,20 +17,6 @@ class persos {
 
     }
 
-    attack(name) {
-
-        this.hp = this.hp - this.attack;
-
-    }
-
-    magie(name) {
-
-    }
-
-    soigner(name) {
-
-    }
-
 }
 
 //Object that obtain the functions and attributes of the class persos
@@ -55,3 +41,19 @@ $(document).ready(function () {
     }
     $(".btnMonsterAttack").css("display", "none");
 });
+
+function attack(actionAttack, none1Attack, none2Attack) {
+    $(".btnMonsterAttack").css("display", "block");
+    $(".perso" + actionAttack).css("display", "none");
+    $(".perso" + none1Attack).css("display", "none");
+    $(".perso" + none2Attack).css("display", "none");
+    $(".cancel" + actionAttack).css("display", "block");
+}
+
+function cancel(action, none1, none2) {
+    $(".btnMonsterAttack").css("display", "none");
+    $(".perso" + action).css("display", "block");
+    $(".perso" + none1).css("display", "block");
+    $(".perso" + none2).css("display", "block");
+    $(".cancel" + action).css("display", "none");
+}

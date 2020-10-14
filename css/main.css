@@ -43,3 +43,13 @@ html, body {
 .imgPerso {
     width: 200px;
 }
+
+.cancelAttack {
+    display: none;
+}
+.cancelMagie {
+    display: none;
+}
+.cancelSoin {
+    display: none;
+}

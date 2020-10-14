@@ -21,13 +21,16 @@
                     <p id="hpPerso"></p>
                 </div>
                 <div class="row d-flex justify-content-center">
-                    <button class="btn btn-success btn_game" onclick="attack()"> Attaquer </button>
+                    <button class="persoAttack btn btn-success btn_game" onclick="attack('Attack', 'Magie', 'Soin')"> Attaquer </button>
+                    <button class="cancelAttack btn btn-success btn_game" onclick="cancel('Attack', 'Magie', 'Soin')"> Annuler </button>
                 </div>
                 <div class="row d-flex justify-content-center mt-3">
-                    <button class="btn btn-success btn_game" onclick=""> Magie </button>
+                    <button class="persoMagie btn btn-success btn_game" onclick="attack('Magie', 'Attack', 'Soin')"> Magie </button>
+                    <button class="cancelMagie btn btn-success btn_game" onclick="cancel('Magie', 'Attack', 'Soin')"> Annuler </button>
                 </div>
                 <div class="row d-flex justify-content-center">
-                    <button class="btn btn-success mt-3 btn_game" onclick=""> Soigner </button>
+                    <button class="persoSoin btn btn-success mt-3 btn_game" onclick=""> Soigner </button>
+                    <button class="cancelSoin btn btn-success btn_game" onclick="cancel('Soin', 'Magie', 'Attack')"> Annuler </button>
                 </div>
             </div>
             <!-- Création dynamique des monstres -->
