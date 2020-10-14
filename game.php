@@ -12,8 +12,7 @@
         <h1 class="text-center"> Game </h1>
         <div class="row">
             <div class="col">
-                <div class="row d-flex justify-content-center">
-                    <p> Image Perso </p>
+                <div id="imagePerso"  class="row d-flex justify-content-center">
                 </div>
                 <div class="row d-flex justify-content-center">
                     <p id="namePerso"></p>
@@ -22,7 +21,7 @@
                     <p id="hpPerso"></p>
                 </div>
                 <div class="row d-flex justify-content-center">
-                    <button class="btn btn-success btn_game" onclick=""> Attaquer </button>
+                    <button class="btn btn-success btn_game" onclick="attack()"> Attaquer </button>
                 </div>
                 <div class="row d-flex justify-content-center mt-3">
                     <button class="btn btn-success btn_game" onclick=""> Magie </button>
