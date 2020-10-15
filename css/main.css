@@ -53,3 +53,11 @@ html, body {
 .cancelSoin {
     display: none;
 }
+
+#persoCol {
+    align-self: center;
+}
+
+#principalRow {
+    height : 100%;
+}

@@ -10,8 +10,8 @@
 
     <body class="container-fluid">
         <h1 class="text-center"> Game </h1>
-        <div class="row">
-            <div class="col">
+        <div class="row" id ="principalRow">
+            <div class="col" id="persoCol">
                 <div id="imagePerso"  class="row d-flex justify-content-center">
                 </div>
                 <div class="row d-flex justify-content-center">
