@@ -44,14 +44,8 @@ html, body {
     width: 200px;
 }
 
-.cancelAttack {
-    display: none;
-}
-.cancelMagie {
-    display: none;
-}
-.cancelSoin {
-    display: none;
+.cancel {
+    height: 38px;
 }
 
 #persoCol {
@@ -60,4 +54,9 @@ html, body {
 
 #principalRow {
     height : 100%;
+}
+
+.cancelBtn {
+    height: 156px;
+    display: none;
 }

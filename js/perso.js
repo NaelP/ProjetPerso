@@ -112,7 +112,7 @@ function attack(actionAttack, none1Attack, none2Attack) {
     $(".perso" + actionAttack).css("display", "none");
     $(".perso" + none1Attack).css("display", "none");
     $(".perso" + none2Attack).css("display", "none");
-    $(".cancel" + actionAttack).css("display", "block");
+    $(".cancelBtn").css("display", "block");
 }
 
 function cancel(action, none1, none2) {
@@ -120,5 +120,5 @@ function cancel(action, none1, none2) {
     $(".perso" + action).css("display", "block");
     $(".perso" + none1).css("display", "block");
     $(".perso" + none2).css("display", "block");
-    $(".cancel" + action).css("display", "none");
+    $(".cancelBtn").css("display", "none");
 }
