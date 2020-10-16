@@ -1,5 +1,7 @@
 // Randomize the number of monsters that appear
-var numbMonsters = Math.ceil(Math.random() * 3);
+var numbMonsters = Math.ceil(Math.random() * 4);
+var VtempaHp = [];
+var indexAttack = 0;
 
 class persos {
 
@@ -26,6 +28,19 @@ class persos {
                 $("#monstersCol" + numMonsters).css('visibility', 'hidden');
                 cancel('Attack', 'Magie', 'Soin');
             }, 3000);
+            indexAttack++;
+            cancel('Attack', 'Magie', 'Soin');
+            numbMonsters = numbMonsters - 1;
+            // Check if at least 1 monsters is still alive
+            if (numbMonsters > 0) {
+                for(i = numMonsters; i < aMonsters['attack'].length; i++) {
+                    aMonsters['attack'][i] = aMonsters['attack'][i + 1];
+                    console.log(aMonsters['attack'][i + 1]);
+                }
+                this.monstersAttackPerso();
+            } else {
+
+            }
         } else {
             $("#monsters" + numMonsters).html(this.hp + '/' + this.hpMax);
             cancel('Attack', 'Magie', 'Soin');
@@ -34,12 +49,23 @@ class persos {
     }
 
     monstersAttackPerso() {
+        // VtempaHp is an array that contains all the variation of HP from the character in 1 round of monsters attack
         for (i = 0; i < numbMonsters; i++) {
-            setTimeout(function () {
-                perso.hp = perso.hp - aMonsters['attack'][i];
-                $("#hpPerso").html("<strong>" + perso.hp + "/" + perso.hpMax + " HP</strong>");
-            }, 1500);
+            perso.hp = perso.hp - aMonsters['attack'][i];
+            VtempaHp[i] = perso.hp;
         }
+        i = -1;
+        // var needed to clear the function after with the function clearInterval
+        var inter = setInterval(function () {
+            i++;
+            $("#hpPerso").html("<strong>" + VtempaHp[i] + "/" + perso.hpMax + " HP</strong>");
+        }, 1000);
+        // Launch the interval
+        inter;
+        // Clear setInterval after all the monsters attacked
+        setTimeout(function () {
+            clearInterval(inter);
+        }, (numbMonsters * 1000));
     }
 
 }
@@ -66,12 +92,12 @@ monsters1.attack = 5;
 monsters2.name = 'Titan (10 mètres)'
 monsters2.hpMax = 17;
 monsters2.hp = 17;
-monsters2.attack = 7;
+monsters2.attack = 10;
 
 monsters3.name = 'Titan (13 mètres)'
 monsters3.hp = 18;
 monsters3.hpMax = 18;
-monsters3.attack = 12;
+monsters3.attack = 15;
 
 monsters4.name = 'Titan Feminin'
 monsters4.hp = 19;
@@ -107,8 +133,6 @@ aMonsters['attack'] = [
 
 $(document).ready(function () {
     for (i = 0; i < numbMonsters; i++) {
-        var concat = 'monsters' + i;
-        console.log(concat);
         $("#monsters").append(`<div class='row mb-5'><div class= 'col monstersColDimension' id='monstersCol` + i + `' ><div class='row d-flex justify-content-center'><p> Image Monstre </p></div><div class='row d-flex justify-content-center'><p> ` + aMonsters['name'][i] + ` </p></div><div class='row d-flex justify-content-center'><p id='monsters`+ i +`'> `+ aMonsters['hp'][i] +` </p></div><div class='row d-flex justify-content-center'><button class='btnMonsterAttack btn btn-warning mt-3 btn_game' onclick='monsters` + (i + 1) + `.persoAttackMonsters(` + i + `)'> Attaquer </button></div></div ></div >`);
     }
     $(".btnMonsterAttack").css("display", "none");
