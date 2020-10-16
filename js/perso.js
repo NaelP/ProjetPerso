@@ -37,36 +37,18 @@ class persos {
                     aMonsters['attack'][i] = aMonsters['attack'][i + 1];
                     console.log(aMonsters['attack'][i + 1]);
                 }
-                this.monstersAttackPerso();
+                monstersAttackPerso();
             } else {
 
             }
         } else {
             $("#monsters" + numMonsters).html(this.hp + '/' + this.hpMax);
             cancel('Attack', 'Magie', 'Soin');
-            this.monstersAttackPerso();
+            monstersAttackPerso();
         }
     }
 
-    monstersAttackPerso() {
-        // VtempaHp is an array that contains all the variation of HP from the character in 1 round of monsters attack
-        for (i = 0; i < numbMonsters; i++) {
-            perso.hp = perso.hp - aMonsters['attack'][i];
-            VtempaHp[i] = perso.hp;
-        }
-        i = -1;
-        // var needed to clear the function after with the function clearInterval
-        var inter = setInterval(function () {
-            i++;
-            $("#hpPerso").html("<strong>" + VtempaHp[i] + "/" + perso.hpMax + " HP</strong>");
-        }, 1000);
-        // Launch the interval
-        inter;
-        // Clear setInterval after all the monsters attacked
-        setTimeout(function () {
-            clearInterval(inter);
-        }, (numbMonsters * 1000));
-    }
+    
 
 }
 
@@ -80,7 +62,7 @@ var monsters4 = new persos();
 
 
 perso.name = "Eren";
-perso.hp = 120;
+perso.hp = 150;
 perso.hpMax = 150;
 perso.attack = 12;
 
@@ -165,3 +147,37 @@ function cancel(action, none1, none2) {
     $("#CancelButton").css("height", "0px");
     $("#CancelButton").css("margin-top", "0px");
 }
+
+function unclickButton() {
+    $(".persoSoin").prop("disabled", true);
+    $(".persoMagie").prop("disabled", true);
+    $(".persoAttack").prop("disabled", true);
+}
+
+function reValidButton() {
+    $(".persoSoin").prop("disabled", false);
+    $(".persoMagie").prop("disabled", false);
+    $(".persoAttack").prop("disabled", false);
+}
+
+function monstersAttackPerso() {
+    unclickButton();
+    // VtempaHp is an array that contains all the variation of HP from the character in 1 round of monsters attack
+    for (i = 0; i < numbMonsters; i++) {
+        perso.hp = perso.hp - aMonsters['attack'][i];
+        VtempaHp[i] = perso.hp;
+    }
+    i = -1;
+    // var needed to clear the function after with the function clearInterval
+    var inter = setInterval(function () {
+        i++;
+        $("#hpPerso").html("<strong>" + VtempaHp[i] + "/" + perso.hpMax + " HP</strong>");
+    }, 1000);
+    // Launch the interval
+    inter;
+    // Clear setInterval after all the monsters attacked
+    setTimeout(function () {
+        clearInterval(inter);
+        reValidButton();
+    }, (numbMonsters * 1000));
+};
