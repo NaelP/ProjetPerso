@@ -44,19 +44,28 @@ html, body {
     width: 200px;
 }
 
-.cancel {
-    height: 38px;
-}
-
 #persoCol {
-    align-self: center;
+    height: 100%;
 }
 
 #principalRow {
     height : 100%;
 }
 
-.cancelBtn {
-    height: 156px;
-    display: none;
+.monstersColDimension {
+    height: 174px;
+}
+
+#CancelButton {
+    visibility: hidden;
+    height: 0px;
+    margin-top: 0px;
+}
+
+#border {
+    align-self: center;
+    width: 250px;
+    height: 400px;
+    border: 2px solid black;
+    box-shadow: -4px 5px 8px 0px black;
 }
