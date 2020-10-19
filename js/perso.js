@@ -1,7 +1,11 @@
 // Randomize the number of monsters that appear
 var numbMonsters = Math.ceil(Math.random() * 4);
 var VtempaHp = [];
-var indexAttack = 0;
+var aAttack = [];
+aAttack = [2, 1.1, 1.1, 0.9, 0.9];
+var attackPerso;
+var vTempHp;
+var vTempHpMax;
 
 class persos {
 
@@ -18,33 +22,62 @@ class persos {
 
         this.hpMax;
 
+        this.xp;
+
+        this.level;
+
     }
 
     persoAttackMonsters(numMonsters) {
-        this.hp = this.hp - perso.attack;
+        attackPerso = (Math.floor(perso.attack * aAttack[(Math.floor(Math.random() * 5))]))
+        this.hp = this.hp - attackPerso;
         if(this.hp <= 0) {
             $("#monsters" + numMonsters).html('Vous avez vaincu : ' + this.name) + ' !';
             setTimeout(function() {
                 $("#monstersCol" + numMonsters).css('visibility', 'hidden');
                 cancel('Attack', 'Magie', 'Soin');
-            }, 3000);
-            indexAttack++;
+            }, 1000);
             cancel('Attack', 'Magie', 'Soin');
+            perso.xp = perso.xp + this.xp;
+            this.levelUp();
+            $("#xpPerso").html("<strong>" + perso.xp + "/" + xpMax + "</strong>");
             numbMonsters = numbMonsters - 1;
             // Check if at least 1 monsters is still alive
             if (numbMonsters > 0) {
                 for(i = numMonsters; i < aMonsters['attack'].length; i++) {
                     aMonsters['attack'][i] = aMonsters['attack'][i + 1];
-                    console.log(aMonsters['attack'][i + 1]);
                 }
                 monstersAttackPerso();
             } else {
 
             }
         } else {
-            $("#monsters" + numMonsters).html(this.hp + '/' + this.hpMax);
+            $("#monsters" + numMonsters).html("- " + attackPerso + "HP !");
+            console.log(this.hp);
+            vTempHp = this.hp;
+            vTempHpMax = this.hpMax;
+            setTimeout(function () {
+                $("#monsters" + numMonsters).html(vTempHp + '/' + vTempHpMax);
+            }, 1000);
             cancel('Attack', 'Magie', 'Soin');
             monstersAttackPerso();
+        }
+    }
+
+    levelUp() {
+        if (perso.xp > xpMax) {
+            while(perso.xp >= xpMax) {
+                console.log(perso.xp);
+                perso.level++;
+                perso.xp = perso.xp - xpMax;
+                xpMax = perso.level * 5;
+            }
+            $("#levelPerso").html("<strong>" + perso.level + "</strong>");
+            $("#levelUp").html(perso.level);
+            $("#showLevel").css("animation", "bright 3s");
+            setTimeout(function () {
+                $("#showLevel").css("animation", "");
+            }, 3000);
         }
     }
 
@@ -65,26 +98,36 @@ perso.name = "Eren";
 perso.hp = 150;
 perso.hpMax = 150;
 perso.attack = 12;
+perso.xp = 0;
+perso.level = 15;
 
 monsters1.name = 'Titan (8 mètres)'
 monsters1.hp = 15;
 monsters1.hpMax = 15;
 monsters1.attack = 5;
+monsters1.level = 7;
+monsters1.xp = 70;
 
 monsters2.name = 'Titan (10 mètres)'
 monsters2.hpMax = 17;
 monsters2.hp = 17;
 monsters2.attack = 10;
+monsters2.level = 10;
+monsters2.xp = 80;
 
 monsters3.name = 'Titan (13 mètres)'
 monsters3.hp = 18;
 monsters3.hpMax = 18;
 monsters3.attack = 15;
+monsters3.level = 14;
+monsters3.xp = 160;
 
 monsters4.name = 'Titan Feminin'
 monsters4.hp = 19;
 monsters4.hpMax = 19;
 monsters4.attack = 20;
+monsters4.level = 25;
+monsters4.xp = 270;
 
 
 var aMonsters = [];
@@ -115,16 +158,19 @@ aMonsters['attack'] = [
 
 $(document).ready(function () {
     for (i = 0; i < numbMonsters; i++) {
-        $("#monsters").append(`<div class='row mb-5'><div class= 'col monstersColDimension' id='monstersCol` + i + `' ><div class='row d-flex justify-content-center'><p> Image Monstre </p></div><div class='row d-flex justify-content-center'><p> ` + aMonsters['name'][i] + ` </p></div><div class='row d-flex justify-content-center'><p id='monsters`+ i +`'> `+ aMonsters['hp'][i] +` </p></div><div class='row d-flex justify-content-center'><button class='btnMonsterAttack btn btn-warning mt-3 btn_game' onclick='monsters` + (i + 1) + `.persoAttackMonsters(` + i + `)'> Attaquer </button></div></div ></div >`);
+        $("#monsters").append(`<div class='row mb-5'><div class= 'col monstersColDimension' id='monstersCol` + i + `' ><div class='row d-flex justify-content-center'><p> Image Monstre </p></div><div class='row d-flex justify-content-center'><p> ` + aMonsters['name'][i] + ` </p></div><div class='row d-flex justify-content-center'><p id='monsters`+ i +`'> `+ aMonsters['hp'][i] +` </p><p id=degat` + i + `> </p></div><div class='row d-flex justify-content-center'><button class='btnMonsterAttack btn btn-warning mt-3 btn_game' onclick='monsters` + (i + 1) + `.persoAttackMonsters(` + i + `)'> Attaquer </button></div></div ></div >`);
     }
     $(".btnMonsterAttack").css("display", "none");
 });
 
-
+var xpMax = perso.level * 5;
 
 $("#namePerso").html("<strong>" + perso.name + "</strong>");
 $("#hpPerso").html("<strong>" + perso.hp + "/" + perso.hpMax + " HP</strong>");
 $("#imagePerso").html(`<img class="imgPerso" src='img/` + perso.name + `.png' />`);
+$("#levelPerso").html("<strong>" + perso.level + "</strong>");
+$("#xpPerso").html("<strong>" + perso.xp + "/" + xpMax + "</strong>");
+
 
 
 
@@ -169,15 +215,23 @@ function monstersAttackPerso() {
     }
     i = -1;
     // var needed to clear the function after with the function clearInterval
+    var interAnimation = setInterval(function () {
+        $("#border").removeClass("animationAttacked");
+        $("#border").removeClass("animationAttacked");
+    }, 1000);
+
     var inter = setInterval(function () {
         i++;
         $("#hpPerso").html("<strong>" + VtempaHp[i] + "/" + perso.hpMax + " HP</strong>");
-    }, 1000);
+        $("#border").addClass("animationAttacked");
+        $("#border").addClass("animationAttacked");
+    }, 1001);
     // Launch the interval
     inter;
+    interAnimation;
     // Clear setInterval after all the monsters attacked
     setTimeout(function () {
-        clearInterval(inter);
+        clearInterval(inter, interAnimation);
         reValidButton();
-    }, (numbMonsters * 1000));
+    }, (numbMonsters * 1100));
 };

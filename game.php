@@ -10,9 +10,12 @@
 
     <body class="container-fluid">
         <h1 class="text-center"> Game </h1>
+        <div id="showLevel" class="row d-flex justify-content-center">
+            <p> Level Up ! You reached Level &nbsp;<p id="levelUp"></p>&nbsp;!</p>
+        </div>
         <div class="row" id ="principalRow">
             <div class="col d-flex justify-content-center" id="persoCol">
-                <div id="border">
+                <div id="border" class="">
                     <div id="imagePerso"  class="row d-flex justify-content-center">
                     </div>
                     <div class="row d-flex justify-content-center">
@@ -20,6 +23,12 @@
                     </div>
                     <div class="row d-flex justify-content-center">
                         <p id="hpPerso"></p>
+                    </div>
+                    <div class="row d-flex justify-content-center">
+                        <p id="levelPerso"></p>
+                    </div>
+                    <div class="row d-flex justify-content-center">
+                        <p id="xpPerso"></p>
                     </div>
                     <div id="CancelButton" class="row d-flex justify-content-center">
                         <button class="cancel btn btn-danger btn_game" onclick="cancel('Attack', 'Magie', 'Soin')"> Annuler </button>

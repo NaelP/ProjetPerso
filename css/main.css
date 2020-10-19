@@ -65,7 +65,51 @@ html, body {
 #border {
     align-self: center;
     width: 250px;
-    height: 400px;
+    height: 475px;
     border: 2px solid black;
     box-shadow: -4px 5px 8px 0px black;
+    transform: translate3d(0, 0, 0);
+}
+
+#showLevel {
+    color: rgb(8, 121, 8);
+    font-size: large;
+    font-weight: 800;
+    opacity: 0;
+}
+
+.animationAttacked {
+    animation : shake 0.5s;
+    transform : translate3d(0, 0, 0);
+}
+
+@keyframes bright {
+	0% {
+        /* Start from -150px to initial position from 0 opacity to 1 */
+		transform: translateY(150px);
+		opacity: 0;
+	}
+	50% {
+		transform: translateY(0px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(150px);
+        opacity: 0;
+    }
+}
+
+@keyframes shake {
+	10%, 90% {
+		transform: translate3d(-1px, 0, 0);
+	}
+	20%, 80% {
+		transform: translate3d(2px, 0, 0);
+    }
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
 }
