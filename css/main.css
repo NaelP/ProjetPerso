@@ -4,6 +4,12 @@ html, body {
     width: 100%;
 }
 
+/* #bodyBack {
+    background-image : url("../img/back.jpg");
+    background-repeat : no-repeat;
+    background-size: cover;
+} */
+
 .connect {
     width: 120px;
 }

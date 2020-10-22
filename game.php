@@ -8,7 +8,7 @@
     <title>Game</title>
 </head>
 
-    <body class="container-fluid">
+    <body id="bodyBack" class="container-fluid">
         <div id="showLevel" class="row d-flex justify-content-center">
             <p> Level Up ! You reached Level &nbsp;<p id="levelUp"></p>&nbsp;!</p>
         </div>

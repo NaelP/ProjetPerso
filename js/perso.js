@@ -52,6 +52,7 @@ class persos {
             $("#xpPerso").html("<strong>" + perso.xp + "/" + xpMax + " XP</strong>");
             // Check if at least 1 monsters is still alive
             if (numbOfMonstersLeft > 0) {
+                unclickButton();
                 for(i = numMonsters; i < aMonsters['attack'].length; i++) {
                     aMonsters['attack'][i] = aMonsters['attack'][i + 1];
                 }
