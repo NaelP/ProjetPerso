@@ -44,6 +44,10 @@ html, body {
     width: 200px;
 }
 
+.imgMonsters {
+    width: 80px;
+}
+
 #persoCol {
     height: 100%;
 }
@@ -71,6 +75,13 @@ html, body {
     transform: translate3d(0, 0, 0);
 }
 
+#borderMonsters {
+    width: 270px;
+    height: 270px;
+    border: 2px solid black;
+    box-shadow: -4px 5px 8px 0px black;
+}
+
 #showLevel {
     color: rgb(8, 121, 8);
     font-size: large;
@@ -78,9 +89,17 @@ html, body {
     opacity: 0;
 }
 
+.monstersRow {
+    height: 250px;
+}
+
 .animationAttacked {
     animation : shake 0.5s;
     transform : translate3d(0, 0, 0);
+}
+
+.animationAttackedText {
+    animation: growText 0.9s;
 }
 
 @keyframes bright {
@@ -111,5 +130,18 @@ html, body {
     }
     40%, 60% {
         transform: translate3d(4px, 0, 0);
+    }
+}
+
+@keyframes growText {
+	0% {
+        /* Start from -150px to initial position from 0 opacity to 1 */
+        font-size: 16px;
+	}
+	50% {
+		font-size: 46px;
+    }
+    100% {
+        font-size: 16px;
     }
 }
