@@ -1,5 +1,6 @@
 // Randomize the number of monsters that appear
-var numbOfMonsters = Math.ceil(Math.random() * 3);
+var numbOfMonstersCreated = Math.ceil(Math.random() * 3);
+var numbOfMonstersLeft = numbOfMonstersCreated;
 var VtempaHp = [];
 var aPercentAction = [];
 aPercentAction = [2, 1.1, 1.1, 0.9, 0.9];
@@ -36,8 +37,7 @@ class persos {
         attackPerso = (Math.floor(perso.attack * aPercentAction[(Math.floor(Math.random() * 5))]))
         this.hp = this.hp - attackPerso;
         if(this.hp <= 0) {
-            numbOfMonsters = numbOfMonsters - 1;
-            $(".borderMonsters" + numMonsters).removeClass();
+            numbOfMonstersLeft = numbOfMonstersLeft - 1;
             this.animateDamage(numMonsters, attackPerso);
             vTempNameMonsters = this.name;
             setTimeout(function () {
@@ -51,11 +51,13 @@ class persos {
             this.levelUp();
             $("#xpPerso").html("<strong>" + perso.xp + "/" + xpMax + " XP</strong>");
             // Check if at least 1 monsters is still alive
-            if (numbOfMonsters > 0) {
+            if (numbOfMonstersLeft > 0) {
                 for(i = numMonsters; i < aMonsters['attack'].length; i++) {
                     aMonsters['attack'][i] = aMonsters['attack'][i + 1];
                 }
-                monstersAttackPerso();
+                setTimeout(function () {
+                    monstersAttackPerso();
+                }, 2000);
             } else {
 
             }
@@ -66,6 +68,7 @@ class persos {
         }
     }
 
+    // Method that show the level up of your hero
     levelUp() {
         if (perso.xp > xpMax) {
             while(perso.xp >= xpMax) {
@@ -83,6 +86,7 @@ class persos {
         }
     }
 
+     // Method that animate the damages that take the monster focus
     animateDamage(numMonsters, attackPerso) {
         $("#monsters" + numMonsters).html(" - " + attackPerso + "HP !</strong>");
         $("#monsters" + numMonsters).css("color", "red");
@@ -90,22 +94,35 @@ class persos {
         $("#monsters" + numMonsters).addClass("animationAttackedText");
         vTempHp = this.hp;
         vTempHpMax = this.hpMax;
-        setTimeout(function () {
-            $("#monsters" + numMonsters).html(vTempHp + '/' + vTempHpMax);
-            $("#monsters" + numMonsters).css("color", "black");
-            $("#monsters" + numMonsters).css("font-weight", "400");
-            $("#monsters" + numMonsters).removeClass("animationAttackedText");
-        }, 1000);
+        if(this.hp > 0) {
+            setTimeout(function () {
+                $("#monsters" + numMonsters).html(vTempHp + '/' + vTempHpMax);
+                $("#monsters" + numMonsters).css("color", "black");
+                $("#monsters" + numMonsters).css("font-weight", "400");
+                $("#monsters" + numMonsters).removeClass("animationAttackedText");
+            }, 1000);
+        } else {
+            setTimeout(function () {
+                $("#monsters" + numMonsters).css("color", "black");
+                $("#monsters" + numMonsters).css("font-weight", "400");
+                $("#monsters" + numMonsters).removeClass("animationAttackedText");
+            }, 1000);
+        }
     }
 
+    //Method to heal the hero and animate the HP then launch the monsters attack turn
     soin() {
         soin = (Math.floor(this.heal * aPercentAction[(Math.floor(Math.random() * 5))]))
-        console.log(this.hp);
         this.hp = (this.hp + soin);
         if(this.hp > this.hpMax) {
             this.hp = this.hpMax;
         }
-        $("#hpPerso").addClass("animationHealPerso");
+        $("#hpPerso").removeClass("animationAttackedText");
+
+        setTimeout(function () {
+            $("#hpPerso").addClass("animationHealPerso");
+        }, 50);
+
         $("#hpPerso").html("<strong>" + perso.hp + "/" + perso.hpMax + " HP</strong>");
         setTimeout(function () {
             $("#hpPerso").removeClass("animationHealPerso");
@@ -200,7 +217,7 @@ aMonsters['image'] = [
 ]
 
 $(document).ready(function () {
-    for (i = 0; i < numbOfMonsters; i++) {
+    for (i = 0; i < numbOfMonstersCreated; i++) {
         $("#monsters").append(`
         <div class='monstersRow row mb-5'>
             <div class= 'col monstersColDimension d-flex justify-content-center' id='monstersCol` + i + `' >
@@ -277,47 +294,65 @@ function reValidButton() {
 }
 
 function monstersAttackPerso() {
-    for (i = 0; i < numbOfMonsters; i++) {
+    VtempaHp = [];
+    for (i = 0; i < numbOfMonstersCreated; i++) {
         $(".borderMonsters" + i).removeClass("animationAttackMonster");
     }
+    
     unclickButton();
+    
     // VtempaHp is an array that contains all the variation of HP from the character in 1 round of monsters attack
-    for (i = 0; i < numbOfMonsters; i++) {
+    for (i = 0; i < numbOfMonstersLeft; i++) {
         perso.hp = perso.hp - aMonsters['attack'][i];
         VtempaHp[i] = perso.hp;
+        if(perso.hp < (perso.hpMax * 0.3)) {
+            setTimeout(function () {
+                $("#hpPerso").css("color", "red");
+            }, ((numbOfMonstersCreated * (900)) + 900));
+        }
+        console.log(VtempaHp);
     }
-    i = -1;
+
+    var indexOfMonsters = -1;
+    var indexOfPersoHp = -1;
     
     var inter = setInterval(function () {
-        i++;
-        console.log(8);
-        $("#hpPerso").addClass("animationAttackedText");
-        if(i < numbOfMonsters) {
-            $("#hpPerso").html("<strong>" + VtempaHp[i] + "/" + perso.hpMax + " HP</strong>");
-            if ($(".borderMonsters" + i).css("visibility") == "visible") {
-                $("#hpPerso").addClass("animationAttackedText");
-                $("#border").addClass("animationAttacked");
-                $(".borderMonsters" + i).addClass("animationAttackMonster");
-            } else if (($(".borderMonsters" + i).css("visibility") == "hidden") && i < (numbOfMonsters - 1)) {
-                i++;
-                $("#hpPerso").addClass("animationAttackedText");
-                $("#border").addClass("animationAttacked");
-                $(".borderMonsters" + i).addClass("animationAttackMonster");
+        if (indexOfMonsters < numbOfMonstersCreated) {
+            indexOfMonsters++;
+            indexOfPersoHp++;
+            if ($(".borderMonsters" + indexOfMonsters).css("visibility") == "visible") {
+                $("#hpPerso").html("<strong>" + VtempaHp[indexOfPersoHp] + "/" + perso.hpMax + " HP</strong>");
+                console.log(indexOfMonsters + " visible");
+                $("#border").removeClass("animationAttacked");
+                $("#hpPerso").removeClass("animationAttackedText");
+                $("#hpPerso").removeClass("animationHealPerso");
+                setTimeout(function () {
+                    $("#hpPerso").addClass("animationAttackedText");
+                    $("#border").addClass("animationAttacked");
+                }, (50));
+                $(".borderMonsters" + indexOfMonsters).addClass("animationAttackMonster");
+            } else if (($(".borderMonsters" + indexOfMonsters).css("visibility") == "hidden") && indexOfMonsters < (numbOfMonstersCreated - 1)) {
+                $("#hpPerso").html("<strong>" + VtempaHp[indexOfPersoHp] + "/" + perso.hpMax + " HP</strong>");
+                indexOfMonsters++;
+                console.log(indexOfMonsters + " hidden");
+                $("#border").removeClass("animationAttacked");
+                $("#hpPerso").removeClass("animationAttackedText");
+                $("#hpPerso").removeClass("animationHealPerso");
+                setTimeout(function () {
+                    $("#hpPerso").addClass("animationAttackedText");
+                    $("#border").addClass("animationAttacked");
+                }, (50));
+                $(".borderMonsters" + indexOfMonsters).addClass("animationAttackMonster");
             }
         }
-    }, 900);
+    }, 950);
 
     // var needed to clear the function after with the function clearInterval
-    var interAnimation = setInterval(function () {
-        $("#border").removeClass("animationAttacked");
-        $("#hpPerso").removeClass("animationAttackedText");
-    }, 901);
+
     // Clear setInterval after all the monsters attacked
     setTimeout(function () {
-        clearInterval(inter, interAnimation);
-        for(i = 0; i < numbOfMonsters; i++) {
-            $(".borderMonsters" + i).removeClass("animationAttackMonster");
-        }
+        clearInterval(inter);
         reValidButton();
-    }, (numbOfMonsters * 1900));
+    }, ((numbOfMonstersCreated * (900)) + 900));
+
 };
