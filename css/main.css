@@ -75,7 +75,7 @@ html, body {
     transform: translate3d(0, 0, 0);
 }
 
-#borderMonsters {
+.borderMonstersCss {
     width: 270px;
     height: 270px;
     border: 2px solid black;
@@ -100,6 +100,15 @@ html, body {
 
 .animationAttackedText {
     animation: growText 0.9s;
+}
+
+.animationAttackMonster {
+    animation: attack 0.9s;
+}
+
+.animationHealPerso {
+    animation: growText 0.9s;
+    color: rgb(9, 134, 9);
 }
 
 @keyframes bright {
@@ -143,5 +152,18 @@ html, body {
     }
     100% {
         font-size: 16px;
+    }
+}
+
+@keyframes attack {
+	0% {
+        /* Start from -150px to initial position from 0 opacity to 1 */
+        transform: translateX(0px);
+	}
+	50% {
+        transform: translateX(-150px);
+    }
+    100% {
+        transform: translateX(0px);
     }
 }

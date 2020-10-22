@@ -1,12 +1,13 @@
 // Randomize the number of monsters that appear
-var numbMonsters = Math.ceil(Math.random() * 3);
+var numbOfMonsters = Math.ceil(Math.random() * 3);
 var VtempaHp = [];
-var aAttack = [];
-aAttack = [2, 1.1, 1.1, 0.9, 0.9];
+var aPercentAction = [];
+aPercentAction = [2, 1.1, 1.1, 0.9, 0.9];
 var attackPerso;
 var vTempHp;
 var vTempHpMax;
 var vTempNameMonsters;
+var soin;
 
 class persos {
 
@@ -27,12 +28,16 @@ class persos {
 
         this.level;
 
+        this.heal;
+
     }
 
     persoAttackMonsters(numMonsters) {
-        attackPerso = (Math.floor(perso.attack * aAttack[(Math.floor(Math.random() * 5))]))
+        attackPerso = (Math.floor(perso.attack * aPercentAction[(Math.floor(Math.random() * 5))]))
         this.hp = this.hp - attackPerso;
         if(this.hp <= 0) {
+            numbOfMonsters = numbOfMonsters - 1;
+            $(".borderMonsters" + numMonsters).removeClass();
             this.animateDamage(numMonsters, attackPerso);
             vTempNameMonsters = this.name;
             setTimeout(function () {
@@ -40,15 +45,13 @@ class persos {
             }, 1000);
             setTimeout(function() {
                 $("#monstersCol" + numMonsters).css('visibility', 'hidden');
-                cancel('Attack', 'Magie', 'Soin');
             }, 2000);
             cancel('Attack', 'Magie', 'Soin');
             perso.xp = perso.xp + this.xp;
             this.levelUp();
             $("#xpPerso").html("<strong>" + perso.xp + "/" + xpMax + " XP</strong>");
-            numbMonsters = numbMonsters - 1;
             // Check if at least 1 monsters is still alive
-            if (numbMonsters > 0) {
+            if (numbOfMonsters > 0) {
                 for(i = numMonsters; i < aMonsters['attack'].length; i++) {
                     aMonsters['attack'][i] = aMonsters['attack'][i + 1];
                 }
@@ -95,6 +98,20 @@ class persos {
         }, 1000);
     }
 
+    soin() {
+        soin = (Math.floor(this.heal * aPercentAction[(Math.floor(Math.random() * 5))]))
+        console.log(this.hp);
+        this.hp = (this.hp + soin);
+        if(this.hp > this.hpMax) {
+            this.hp = this.hpMax;
+        }
+        $("#hpPerso").addClass("animationHealPerso");
+        $("#hpPerso").html("<strong>" + perso.hp + "/" + perso.hpMax + " HP</strong>");
+        setTimeout(function () {
+            $("#hpPerso").removeClass("animationHealPerso");
+        }, 1000);
+        monstersAttackPerso();
+    }
     
 
 }
@@ -114,6 +131,7 @@ perso.hpMax = 150;
 perso.attack = 12;
 perso.xp = 0;
 perso.level = 15;
+perso.heal = 19;
 
 monsters1.name = 'Titan (8 mètres)'
 monsters1.hp = 15;
@@ -182,11 +200,11 @@ aMonsters['image'] = [
 ]
 
 $(document).ready(function () {
-    for (i = 0; i < numbMonsters; i++) {
+    for (i = 0; i < numbOfMonsters; i++) {
         $("#monsters").append(`
         <div class='monstersRow row mb-5'>
             <div class= 'col monstersColDimension d-flex justify-content-center' id='monstersCol` + i + `' >
-                <div id="borderMonsters" class="">
+                <div class="borderMonstersCss borderMonsters` + i + `">
                     <div class='row d-flex justify-content-center'>
                         <img class='imgMonsters' src='img/` + aMonsters['image'][i] + `.png' </p>
                     </div>
@@ -224,7 +242,7 @@ function attack(actionAttack, none1Attack, none2Attack) {
     $("#" + none1Attack + "Cancel").css("visibility", "hidden");
     $("#" + none2Attack + "Cancel").css("visibility", "hidden");
     $("#CancelButton").css("visibility", "visible");
-    $("#CancelButton").css("height", "0px");
+    $("#CancelButton").css("height", "38px");
     $("#CancelButton").css("margin-top", "0px");
 }
 
@@ -242,40 +260,64 @@ function unclickButton() {
     $(".persoSoin").prop("disabled", true);
     $(".persoMagie").prop("disabled", true);
     $(".persoAttack").prop("disabled", true);
+    $(".persoSoin").css("visibility", "hidden");
+    $(".persoMagie").css("visibility", "hidden");
+    $(".persoAttack").css("visibility", "hidden");
 }
 
 function reValidButton() {
     $(".persoSoin").prop("disabled", false);
     $(".persoMagie").prop("disabled", false);
     $(".persoAttack").prop("disabled", false);
+    setTimeout(function () {
+        $(".persoSoin").css("visibility", "visible");
+        $(".persoMagie").css("visibility", "visible");
+        $(".persoAttack").css("visibility", "visible");
+    }, 900);
 }
 
 function monstersAttackPerso() {
+    for (i = 0; i < numbOfMonsters; i++) {
+        $(".borderMonsters" + i).removeClass("animationAttackMonster");
+    }
     unclickButton();
     // VtempaHp is an array that contains all the variation of HP from the character in 1 round of monsters attack
-    for (i = 0; i < numbMonsters; i++) {
+    for (i = 0; i < numbOfMonsters; i++) {
         perso.hp = perso.hp - aMonsters['attack'][i];
         VtempaHp[i] = perso.hp;
     }
     i = -1;
+    
+    var inter = setInterval(function () {
+        i++;
+        console.log(8);
+        $("#hpPerso").addClass("animationAttackedText");
+        if(i < numbOfMonsters) {
+            $("#hpPerso").html("<strong>" + VtempaHp[i] + "/" + perso.hpMax + " HP</strong>");
+            if ($(".borderMonsters" + i).css("visibility") == "visible") {
+                $("#hpPerso").addClass("animationAttackedText");
+                $("#border").addClass("animationAttacked");
+                $(".borderMonsters" + i).addClass("animationAttackMonster");
+            } else if (($(".borderMonsters" + i).css("visibility") == "hidden") && i < (numbOfMonsters - 1)) {
+                i++;
+                $("#hpPerso").addClass("animationAttackedText");
+                $("#border").addClass("animationAttacked");
+                $(".borderMonsters" + i).addClass("animationAttackMonster");
+            }
+        }
+    }, 900);
+
     // var needed to clear the function after with the function clearInterval
     var interAnimation = setInterval(function () {
         $("#border").removeClass("animationAttacked");
-        $("#border").removeClass("animationAttacked");
-    }, 1000);
-
-    var inter = setInterval(function () {
-        i++;
-        $("#hpPerso").html("<strong>" + VtempaHp[i] + "/" + perso.hpMax + " HP</strong>");
-        $("#border").addClass("animationAttacked");
-        $("#border").addClass("animationAttacked");
-    }, 1001);
-    // Launch the interval
-    inter;
-    interAnimation;
+        $("#hpPerso").removeClass("animationAttackedText");
+    }, 901);
     // Clear setInterval after all the monsters attacked
     setTimeout(function () {
         clearInterval(inter, interAnimation);
+        for(i = 0; i < numbOfMonsters; i++) {
+            $(".borderMonsters" + i).removeClass("animationAttackMonster");
+        }
         reValidButton();
-    }, (numbMonsters * 1100));
+    }, (numbOfMonsters * 1900));
 };
