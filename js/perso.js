@@ -1,13 +1,21 @@
-// Randomize the number of monsters that appear
+/** Randomize the number of monsters that appear*/
 var numbOfMonstersCreated = Math.ceil(Math.random() * 3);
+/** Less 1 everytime a monster is killed*/
 var numbOfMonstersLeft = numbOfMonstersCreated;
+/** Array needed to show the variation of HP of the character and show it ervery time an animation of monstersAttack is going*/
 var VtempaHp = [];
+/** Array that choose the multiplicator of the attack*/
 var aPercentAction = [];
 aPercentAction = [2, 1.1, 1.1, 0.9, 0.9];
+/** the var wich is used to calcul the attack of the character*/
 var attackPerso;
+/** Temporary var for the HP of the monster*/
 var vTempHp;
+/** Temporary var for the MaxHP of the monster*/
 var vTempHpMax;
+/** Temporary var for the Name of the monster*/
 var vTempNameMonsters;
+/** the var wich is used to calcul the heal of the character*/
 var soin;
 
 class persos {
@@ -33,6 +41,16 @@ class persos {
 
     }
 
+    /** 
+     * This function is used when the character attack the monster
+     * - Calcul the character attack
+     * - Affect the monsters HP
+     * - Check if the monsters is still alive
+     * - Animate the monster
+     * - Add XP and level Up the character if needed
+     * - Reaffect the postition of the monsters in the array
+     * - Launch the monsters attack function
+    */
     persoAttackMonsters(numMonsters) {
         attackPerso = (Math.floor(perso.attack * aPercentAction[(Math.floor(Math.random() * 5))]))
         this.hp = this.hp - attackPerso;
@@ -45,7 +63,7 @@ class persos {
             }, 1000);
             setTimeout(function() {
                 $("#monstersCol" + numMonsters).css('visibility', 'hidden');
-            }, 2000);
+            }, 1500);
             cancel('Attack', 'Magie', 'Soin');
             perso.xp = perso.xp + this.xp;
             this.levelUp();
@@ -58,7 +76,7 @@ class persos {
                 }
                 setTimeout(function () {
                     monstersAttackPerso();
-                }, 2000);
+                }, 1600);
             } else {
 
             }
@@ -69,7 +87,9 @@ class persos {
         }
     }
 
-    // Method that show the level up of your hero
+    /** 
+    * Method that show the level up of your hero
+    */
     levelUp() {
         if (perso.xp > xpMax) {
             while(perso.xp >= xpMax) {
@@ -87,7 +107,9 @@ class persos {
         }
     }
 
-     // Method that animate the damages that take the monster focus
+    /** 
+     * Method that animate the damages that take the monster focused 
+     */
     animateDamage(numMonsters, attackPerso) {
         $("#monsters" + numMonsters).html(" - " + attackPerso + "HP !</strong>");
         $("#monsters" + numMonsters).css("color", "red");
@@ -111,7 +133,9 @@ class persos {
         }
     }
 
-    //Method to heal the hero and animate the HP then launch the monsters attack turn
+    /** 
+     * Method to heal the hero and animate the HP then launch the monsters attack turn
+    */
     soin() {
         soin = (Math.floor(this.heal * aPercentAction[(Math.floor(Math.random() * 5))]))
         this.hp = (this.hp + soin);
@@ -134,9 +158,10 @@ class persos {
 
 }
 
-//Object that obtain the functions and attributes of the class persos
+/** 
+ * Objects that obtain the functions and attributes of the class persos 
+*/
 var perso = new persos();
-
 var monsters1 = new persos();
 var monsters2 = new persos();
 var monsters3 = new persos();
@@ -217,6 +242,10 @@ aMonsters['image'] = [
     monsters4.image
 ]
 
+/** The xpMax of the perso */
+var xpMax = perso.level * 5;
+
+/** Construct the monsters informations on the page*/
 $(document).ready(function () {
     for (i = 0; i < numbOfMonstersCreated; i++) {
         $("#monsters").append(`
@@ -243,17 +272,17 @@ $(document).ready(function () {
     $(".btnMonsterAttack").css("display", "none");
 });
 
-var xpMax = perso.level * 5;
+/** Construct the perso informations*/
+$(document).ready(function () {
+    $("#namePerso").html("<strong>" + perso.name + "</strong>");
+    $("#hpPerso").html("<strong>" + perso.hp + "/" + perso.hpMax + " HP</strong>");
+    $("#imagePerso").html(`<img class="imgPerso" src='img/` + perso.name + `.png' />`);
+    $("#levelPerso").html("<strong>Level " + perso.level + "</strong>");
+    $("#xpPerso").html("<strong>" + perso.xp + "/" + xpMax + " XP</strong>");
+});
 
-$("#namePerso").html("<strong>" + perso.name + "</strong>");
-$("#hpPerso").html("<strong>" + perso.hp + "/" + perso.hpMax + " HP</strong>");
-$("#imagePerso").html(`<img class="imgPerso" src='img/` + perso.name + `.png' />`);
-$("#levelPerso").html("<strong>Level " + perso.level + "</strong>");
-$("#xpPerso").html("<strong>" + perso.xp + "/" + xpMax + " XP</strong>");
 
-
-
-
+/** Show and hide on the attack perso button*/
 function attack(actionAttack, none1Attack, none2Attack) {
     $(".btnMonsterAttack").css("display", "block");
     $("#" + actionAttack + "Cancel").css("visibility", "hidden");
@@ -263,7 +292,7 @@ function attack(actionAttack, none1Attack, none2Attack) {
     $("#CancelButton").css("height", "38px");
     $("#CancelButton").css("margin-top", "0px");
 }
-
+/** Show and hide on the cancel perso button*/
 function cancel(action, none1, none2) {
     $(".btnMonsterAttack").css("display", "none");
     $("#" + action + "Cancel").css("visibility", "visible");
@@ -273,7 +302,7 @@ function cancel(action, none1, none2) {
     $("#CancelButton").css("height", "0px");
     $("#CancelButton").css("margin-top", "0px");
 }
-
+/** Disable the character's buttons effects */
 function unclickButton() {
     $(".persoSoin").prop("disabled", true);
     $(".persoMagie").prop("disabled", true);
@@ -282,7 +311,7 @@ function unclickButton() {
     $(".persoMagie").css("visibility", "hidden");
     $(".persoAttack").css("visibility", "hidden");
 }
-
+/** Enable the character's buttons effects */
 function reValidButton() {
     $(".persoSoin").prop("disabled", false);
     $(".persoMagie").prop("disabled", false);
@@ -293,7 +322,15 @@ function reValidButton() {
         $(".persoAttack").css("visibility", "visible");
     }, 900);
 }
-
+/** 
+ * This function is launch everytime the character has finished his turn
+ * - It remove the class of the animation in case it remains
+ * - Disable the buttons of the character
+ * - Show characters HPs everytime a hit comes
+ * - Check if we are not out of bounds of the array
+ * - Check if the monster who attack is still alive
+ * - Animate the texts and monster and clear the interval at the end
+ */
 function monstersAttackPerso() {
     VtempaHp = [];
     for (i = 0; i < numbOfMonstersCreated; i++) {
@@ -309,7 +346,11 @@ function monstersAttackPerso() {
         if(perso.hp < (perso.hpMax * 0.3)) {
             setTimeout(function () {
                 $("#hpPerso").css("color", "red");
-            }, ((numbOfMonstersCreated * (900)) + 900));
+            }, ((numbOfMonstersLeft * (900)) + 900));
+        } else {
+            setTimeout(function () {
+                $("#hpPerso").css("color", "black");
+            }, ((numbOfMonstersLeft * (900)) + 900));
         }
         console.log(VtempaHp);
     }
@@ -354,6 +395,6 @@ function monstersAttackPerso() {
     setTimeout(function () {
         clearInterval(inter);
         reValidButton();
-    }, ((numbOfMonstersCreated * (900)) + 900));
+    }, ((numbOfMonstersLeft * (900)) + 900));
 
 };
