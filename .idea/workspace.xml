@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="33d529c7-484a-452e-9737-9981836ea962" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/NaelP/ProjetPerso" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1jlzfr05WgMuIxe2PbmcGtonIRu" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="copyright" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="index.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/ProjetPerso/index.php" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.php" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="33d529c7-484a-452e-9737-9981836ea962" name="Default Changelist" comment="" />
+      <created>1604393572985</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1604393572985</updated>
+      <workItem from="1604393575207" duration="1405000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="792" y="285" key="FileChooserDialogImpl" timestamp="1604400899604">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="792" y="285" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1604400899604" />
+    <state width="1340" height="269" key="GridCell.Tab.0.bottom" timestamp="1604400644748">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1340" height="269" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604400644748" />
+    <state width="1340" height="269" key="GridCell.Tab.0.center" timestamp="1604400644748">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1340" height="269" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604400644748" />
+    <state width="1340" height="269" key="GridCell.Tab.0.left" timestamp="1604400644748">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1340" height="269" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604400644748" />
+    <state width="1340" height="269" key="GridCell.Tab.0.right" timestamp="1604400644748">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1340" height="269" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604400644748" />
+    <state width="1340" height="269" key="GridCell.Tab.1.bottom" timestamp="1604400644749">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1340" height="269" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604400644749" />
+    <state width="1340" height="269" key="GridCell.Tab.1.center" timestamp="1604400644748">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1340" height="269" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604400644748" />
+    <state width="1340" height="269" key="GridCell.Tab.1.left" timestamp="1604400644748">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1340" height="269" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604400644748" />
+    <state width="1340" height="269" key="GridCell.Tab.1.right" timestamp="1604400644749">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1340" height="269" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604400644749" />
+    <state width="1340" height="269" key="GridCell.Tab.2.bottom" timestamp="1604400644749">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1340" height="269" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604400644749" />
+    <state width="1340" height="269" key="GridCell.Tab.2.center" timestamp="1604400644749">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1340" height="269" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604400644749" />
+    <state width="1340" height="269" key="GridCell.Tab.2.left" timestamp="1604400644749">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1340" height="269" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604400644749" />
+    <state width="1340" height="269" key="GridCell.Tab.2.right" timestamp="1604400644749">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1340" height="269" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604400644749" />
+    <state x="413" y="191" key="SettingsEditor" timestamp="1604393623062">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="413" y="191" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1604393623062" />
+  </component>
+</project>
